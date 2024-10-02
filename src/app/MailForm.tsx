@@ -55,16 +55,15 @@ export default function MailForm() {
   }}
 >
 <h1
-    className="text-4xl md:text-5xl font-extrabold text-center mb-6 transition-all duration-300 hover:text-red-700"
+    className="text-4xl md:text-5xl border-2 border-black-200 font-extrabold text-center mb-6 transition-all duration-300 hover:text-red-700 "
     style={{
-      color: "#A0153E",
+                        background: "linear-gradient(135deg, #FFB0B0 0%, #F6F5F2 50%, #FFB0B0 100%)",
+                        color: "#070F2B",
       letterSpacing: "2px",
     }}
   >
     Create Your Email
   </h1>
-
-      {/* Copilot Sidebar */}
       <CopilotSidebar
         defaultOpen={false}
         instructions={`You are an assistant that helps users compose professional emails.
@@ -74,7 +73,7 @@ When the user provides a subject, generate a professional email content based on
 Use the "generateEmailContent" action to set the generated email content by providing the "content" parameter.`}
         labels={{
           title: "Email Assistant",
-          initial: "Provide a subject to generate an email message.",
+          initial: "Hit generate to create email content",
         }}
       />
 
@@ -105,7 +104,7 @@ Use the "generateEmailContent" action to set the generated email content by prov
       });
 
       if (response.ok) {
-        setEmailSent(true); // Set email sent status to true on successful response
+        setEmailSent(true); 
       } else {
         console.error("Failed to send email:", await response.json());
       }
@@ -114,7 +113,6 @@ Use the "generateEmailContent" action to set the generated email content by prov
     }
   }}
 >
-          {/* Email Input */}
           <div>
           <label className="text-sm font-semibold mb-2 block text-gray-700">
               Enter the Recipient's Email
@@ -129,7 +127,6 @@ Use the "generateEmailContent" action to set the generated email content by prov
             />
           </div>
 
-          {/* Subject Input */}
           <div>
           <label className="text-sm font-semibold mb-2 block text-gray-700">
           Enter the Subject and ask Copilot sidebar
@@ -143,12 +140,10 @@ Use the "generateEmailContent" action to set the generated email content by prov
             />
           </div>
 
-          {/* Instructions for the user to interact with Copilot */}
           <div className="mt-4 text-center text-blue-700">
             <p>Please interact with the Copilot sidebar to generate the email content.</p>
           </div>
 
-          {/* Generated Message Textarea */}
           <div className="mt-4">
             <label className="text-lg font-semibold mb-2 block">
               Generated Email Content
@@ -170,7 +165,6 @@ Use the "generateEmailContent" action to set the generated email content by prov
             />
           </div>
 
-          {/* Submit Button */}
           <div className="flex justify-end">
             <button
               type="submit"
@@ -181,7 +175,6 @@ Use the "generateEmailContent" action to set the generated email content by prov
             </button>
           </div>
 
-          {/* Confirmation Message */}
           {emailSent && (
             <div className="mt-4 p-4 border border-green-500 bg-green-100 text-green-700 rounded">
               Your email has been sent successfully!

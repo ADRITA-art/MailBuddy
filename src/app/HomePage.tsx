@@ -27,17 +27,14 @@ const HomePage: React.FC = () => {
         background: "linear-gradient(135deg, #2E073F 0%, #FFD7C4 50%, #2E073F 100%)",
       }}
     >
-      {/* Title Section */}
       <h1
         className="text-4xl sm:text-5xl font-extrabold text-red-700 mb-8 sm:mb-12 text-center"
-        style={{ color: "#26355D" }}
+        style={{ color: "#000000" }}
       >
         Create Your Mail
       </h1>
 
-      {/* Mailer Options Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-12 mt-6 sm:mt-10">
-        {/* Cold Mailer */}
         <div
           className="group bg-gradient-to-r from-purple-800 to-purple-300 p-10 sm:p-16 rounded-lg shadow-lg border-2 border-black hover:scale-105 transition-all duration-300 cursor-pointer relative"
           onClick={() => handleMailerClick("Cold Mail")}
@@ -55,7 +52,6 @@ const HomePage: React.FC = () => {
           )}
         </div>
 
-        {/* Persuasive Mailer */}
         <div
           className="group bg-gradient-to-r from-purple-800 to-purple-300 p-10 sm:p-16 rounded-lg shadow-lg border-2 border-black hover:scale-105 transition-all duration-200 cursor-pointer relative"
           onClick={() => handleMailerClick("Persuasive Mail")}
@@ -73,7 +69,6 @@ const HomePage: React.FC = () => {
           )}
         </div>
 
-        {/* Leave Mailer */}
         <div
           className="group bg-gradient-to-r from-purple-800 to-purple-300 p-10 sm:p-16 rounded-lg shadow-lg border-2 border-black hover:scale-105 transition-all duration-200 cursor-pointer relative"
           onClick={() => handleMailerClick("Leave Mail")}
@@ -92,7 +87,6 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer Section */}
       <footer className="mt-12 sm:mt-16 text-center text-purple-900">
         Made with 💜 by Adrita
       </footer>
