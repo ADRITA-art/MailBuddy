@@ -14,6 +14,7 @@ export default function MailForm() {
   const [subject, setSubject] = useState("");
   const [generatedMessage, setGeneratedMessage] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [emailSent, setEmailSent] = useState(false); // New state for email sent status
 
   // Make the subject readable to Copilot
   useCopilotReadable({
@@ -48,11 +49,10 @@ export default function MailForm() {
     background: "linear-gradient(135deg, #2E073F 0%, #FFD7C4 50%, #2E073F 100%)",
   }}
 >
-  {/* Heading outside of the box */}
-  <h1
+<h1
     className="text-4xl md:text-5xl font-extrabold text-center mb-6 transition-all duration-300 hover:text-red-700"
     style={{
-      color: "#B8001F",
+      color: "#A0153E",
       letterSpacing: "2px",
     }}
   >
@@ -69,7 +69,7 @@ When the user provides a subject, generate a professional email content based on
 Use the "generateEmailContent" action to set the generated email content by providing the "content" parameter.`}
         labels={{
           title: "Email Assistant",
-          initial: "ENTER THE SUBJECT TO GENERATE EMAIL CONTENT",
+          initial: "Provide a subject to generate an email message.",
         }}
       />
 
@@ -80,43 +80,63 @@ Use the "generateEmailContent" action to set the generated email content by prov
       boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)"
     }}
   >
-       
 
         <form
-          className="space-y-6 "
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Email Sent!");
-          }}
-        >
+  className="space-y-6"
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          subject,
+          message: generatedMessage,
+        }),
+      });
+
+      if (response.ok) {
+        setEmailSent(true); // Set email sent status to true on successful response
+      } else {
+        console.error("Failed to send email:", await response.json());
+      }
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+    }
+  }}
+>
           {/* Email Input */}
           <div>
-        <label className="text-sm font-semibold mb-2 block text-gray-700">
-          Enter the Recipient's Email
-        </label>
-        <input
-          type="email"
-          className="w-full px-4 py-2 border border-gray-500 rounded-lg text-gray-700 bg-purple focus:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow duration-300 ease-in-out shadow-sm hover:shadow-md"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-
+          <label className="text-sm font-semibold mb-2 block text-gray-700">
+              Enter the Recipient's Email
+            </label>
+            <input
+              type="email"
+              className="w-full px-4 py-2 border border-gray-500 rounded-lg text-gray-700 bg-purple focus:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow duration-300 ease-in-out shadow-sm hover:shadow-md"
+              value={email}
+            
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
           {/* Subject Input */}
           <div>
-        <label className="text-sm font-semibold mb-2 block text-gray-700">
-          Enter the Subject and ask Copilot sidebar to generate the content
-        </label>
-        <input
-          type="text"
-          className="w-full px-4 py-2 border border-gray-500 rounded-lg text-gray-700 bg-purple focus:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow duration-300 ease-in-out shadow-sm hover:shadow-md"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          required
-        />
-      </div>
+          <label className="text-sm font-semibold mb-2 block text-gray-700">
+          Enter the Subject and ask Copilot sidebar
+            </label>
+            <input
+              type="text"
+             className="w-full px-4 py-2 border border-gray-500 rounded-lg text-gray-700 bg-purple focus:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow duration-300 ease-in-out shadow-sm hover:shadow-md"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              required
+            />
+          </div>
 
           {/* Instructions for the user to interact with Copilot */}
           <div className="mt-4 text-center text-blue-700">
@@ -125,11 +145,11 @@ Use the "generateEmailContent" action to set the generated email content by prov
 
           {/* Generated Message Textarea */}
           <div className="mt-4">
-          <label className="text-sm font-semibold mb-2 block text-gray-700">
+            <label className="text-lg font-semibold mb-2 block">
               Generated Email Content
             </label>
             <CopilotTextarea
-              className="w-full p-4 border border-gray-500 bg-purple-100 rounded"
+              className="w-full p-4 border-2 border-black bg-purple-100 rounded h-40 overflow-y-auto"
               value={generatedMessage}
               onValueChange={(value) => setGeneratedMessage(value)}
               placeholder="Generated email content will appear here..."
@@ -147,15 +167,21 @@ Use the "generateEmailContent" action to set the generated email content by prov
 
           {/* Submit Button */}
           <div className="flex justify-end">
-          <button
-  type="submit"
-  className="px-6 py-2 bg-gradient-to-r from-green-400 to-green-600 text-white font-bold rounded-full border border-transparent hover:border-green-700 hover:from-green-500 hover:to-green-700 transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl transform hover:scale-105"
-  disabled={!generatedMessage}
->
-  Send
-</button>
-
+            <button
+              type="submit"
+            className="px-6 py-2 bg-gradient-to-r from-green-400 to-green-600 text-white font-bold rounded-full border border-transparent hover:border-green-700 hover:from-green-500 hover:to-green-700 transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl transform hover:scale-105"
+              disabled={!generatedMessage}
+            >
+              Send
+            </button>
           </div>
+
+          {/* Confirmation Message */}
+          {emailSent && (
+            <div className="mt-4 p-4 border border-green-500 bg-green-100 text-green-700 rounded">
+              Your email has been sent successfully!
+            </div>
+          )}
         </form>
       </div>
     </div>
