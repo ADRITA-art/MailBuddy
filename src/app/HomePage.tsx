@@ -8,9 +8,9 @@ const HomePage: React.FC = () => {
   const [tooltip, setTooltip] = useState<string | null>(null);
 
   const handleMailerClick = (mailerType: string): void => {
-    const query = new URLSearchParams({ type: mailerType }).toString();
-    router.push(`/mailer`);
-  };
+    console.log(`Mailer type: ${mailerType}`);
+    router.push(`/mailer?subject=${encodeURIComponent(mailerType)}`);
+};
 
   const handleMouseEnter = (tooltipText: string) => {
     setTooltip(tooltipText);
@@ -40,11 +40,11 @@ const HomePage: React.FC = () => {
         {/* Cold Mailer */}
         <div
           className="group bg-gradient-to-r from-purple-800 to-purple-300 p-10 sm:p-16 rounded-lg shadow-lg border-2 border-black hover:scale-105 transition-all duration-300 cursor-pointer relative"
-          onClick={() => handleMailerClick("Cold Mailer")}
+          onClick={() => handleMailerClick("Cold Mail")}
           onMouseEnter={() => handleMouseEnter("Send a cold mail to make a connection.")}
           onMouseLeave={handleMouseLeave}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-yellow-200 mb-4 sm:mb-6">Cold Mailer</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-yellow-200 mb-4 sm:mb-6">Cold Mail</h2>
           <div className="group-hover:translate-x-2 transition-transform duration-200 text-white text-xl sm:text-2xl">
             →
           </div>
@@ -58,11 +58,11 @@ const HomePage: React.FC = () => {
         {/* Persuasive Mailer */}
         <div
           className="group bg-gradient-to-r from-purple-800 to-purple-300 p-10 sm:p-16 rounded-lg shadow-lg border-2 border-black hover:scale-105 transition-all duration-200 cursor-pointer relative"
-          onClick={() => handleMailerClick("Persuasive Mailer")}
+          onClick={() => handleMailerClick("Persuasive Mail")}
           onMouseEnter={() => handleMouseEnter("Craft a persuasive mail to convince someone.")}
           onMouseLeave={handleMouseLeave}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-yellow-200 mb-4 sm:mb-6">Persuasive Mailer</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-yellow-200 mb-4 sm:mb-6">Persuasive Mail</h2>
           <div className="group-hover:translate-x-2 transition-transform duration-200 text-white text-xl sm:text-2xl">
             →
           </div>
@@ -76,11 +76,11 @@ const HomePage: React.FC = () => {
         {/* Leave Mailer */}
         <div
           className="group bg-gradient-to-r from-purple-800 to-purple-300 p-10 sm:p-16 rounded-lg shadow-lg border-2 border-black hover:scale-105 transition-all duration-200 cursor-pointer relative"
-          onClick={() => handleMailerClick("Leave Mailer")}
+          onClick={() => handleMailerClick("Leave Mail")}
           onMouseEnter={() => handleMouseEnter("Request leave with this mail template.")}
           onMouseLeave={handleMouseLeave}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-yellow-200 mb-4 sm:mb-6">Leave Mailer</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-yellow-200 mb-4 sm:mb-6">Leave Mail</h2>
           <div className="group-hover:translate-x-2 transition-transform duration-200 text-white text-xl sm:text-2xl">
             →
           </div>

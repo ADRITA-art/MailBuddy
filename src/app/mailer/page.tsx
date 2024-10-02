@@ -3,6 +3,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { CopilotSidebar } from "@copilotkit/react-ui";
 import { useCopilotAction, useCopilotReadable } from "@copilotkit/react-core";
 import { CopilotTextarea } from "@copilotkit/react-textarea";
@@ -10,8 +11,11 @@ import "@copilotkit/react-ui/styles.css";
 import "@copilotkit/react-textarea/styles.css";
 
 export default function MailForm() {
+  const searchParams = useSearchParams();
+  const initialSubject = searchParams.get("subject") || "";
+
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState(initialSubject);
   const [generatedMessage, setGeneratedMessage] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [emailSent, setEmailSent] = useState(false); // New state for email sent status
