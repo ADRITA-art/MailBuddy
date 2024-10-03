@@ -1,8 +1,10 @@
 # ✉️ Email Generator with CopilotKit Integration
 
 This project is a **React-based email generator** built with **Next.js**. It allows users to enter an email subject, interact with an AI assistant (via **CopilotKit Sidebar**), generate personalized email content, and send the email—all through a simple, user-friendly form.
-![image](https://github.com/user-attachments/assets/47b45b0f-e79d-420b-9db9-313d9c140e30)
-![image](https://github.com/user-attachments/assets/0b20de7f-3bc4-4d4d-b7c9-7eca2c97e3ac)
+![image](https://github.com/user-attachments/assets/e2a8348e-04cf-40bb-8004-84e30dbe351d)
+
+![image](https://github.com/user-attachments/assets/6abe08c4-282f-45ee-b0af-e994320b5ee1)
+
 
 
 ## 🌟 Features
