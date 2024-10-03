@@ -105,10 +105,14 @@ const HomePage: React.FC = () => {
           )}
         </div>
       </div>
+      <footer
+  className="mt-12 sm:mt-16 text-center z-10 
+  text-[#F6FA70] 
+  xl:text-purple-900"
+>
+  Made with 💜 by Adrita
+</footer>
 
-      <footer className="mt-12 sm:mt-16 text-center text-purple-900 z-10">
-        Made with 💜 by Adrita
-      </footer>
     </div>
   );
 };
