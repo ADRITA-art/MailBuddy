@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     });
 
     await transporter.sendMail({
-      from: '"Adrita Chakraborty" <your-email@example.com>', // sender address
+      from: '"User" <your-email@example.com>', // sender address
       to: email, // list of receivers
       subject: subject, // Use the subject from the request
       text: message, // plain text body
