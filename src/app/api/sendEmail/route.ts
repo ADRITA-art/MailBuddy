@@ -4,24 +4,26 @@ import nodemailer from "nodemailer";
 // Use named export for POST method
 export async function POST(req: NextRequest) {
   try {
-    const { email, subject, message } = await req.json();
-    console.log("Email:", email);
+    const { yourEmail, yourAppPassword, email, subject, message } = await req.json();
+    console.log("Sender Email:", yourEmail);
     console.log("Subject:", subject); // Log the subject for debugging
+    console.log("Recipients email:", email); // Log the subject for debugging
+
 
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
       secure: false,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: yourEmail, // Use the email provided by the user
+        pass: yourAppPassword, // Use the app password provided by the user
       },
     });
 
     await transporter.sendMail({
-      from: '"User" <your-email@example.com>', // sender address
+      from: `"User" <${yourEmail}>`, // sender address
       to: email, // list of receivers
-      subject: subject, // Use the subject from the request
+      subject: subject, // Subject line
       text: message, // plain text body
     });
 
